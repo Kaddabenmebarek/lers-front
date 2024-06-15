@@ -1,0 +1,164 @@
+<!-- Reservation Modal -->
+
+<div class="modal" id="reservation-modal" tabindex="-1" role="dialog" aria-labelledby="reservationModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reservationModalTitle">Reservation Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group date" id="start-datetime-picker" data-target-input="nearest">
+                                    <input type="text" placeholder="start date/time" id="start-datetime" class="form-control datetimepicker-input" data-target="#start-datetime-picker"/>
+                                    <div class="input-group-append" data-target="#start-datetime-picker" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group date" id="end-datetime-picker" data-target-input="nearest">
+                                    <input type="text" placeholder="end date/time" id="end-datetime" class="form-control datetimepicker-input" data-target="#end-datetime-picker"/>
+                                    <div class="input-group-append" data-target="#end-datetime-picker" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <select id="reservation-option" class="form-control">
+                                    <option value="0" selected>Choose Option...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class='col-md-12'>
+                            <input type="text" id="reservation-comment" class="form-control" placeholder="Comment">
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row reservation-ratio">
+                        <div class='col-md-2 ratio-label'>Ratio</div>
+                        <div class='col-md-3'>
+                            <input id="ratio-input" type="number" max="100" class="form-control">
+                        </div>
+                        <div class='col-md-5 ratio-percent' id="ratio-left-val">%</div>
+                    </div>
+                    <br />
+                    <div id="reservation-usage">
+	                    <div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+							  		<input id="reservation-usage-projects-option" data-type="search" placeholder="Project" class="form-control">
+								</div>
+	                   		</div>
+	                    </div>
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group"> 
+	                            	<input id="reservation-usage-compounds-option" data-type="search" placeholder="IDOR number (auto-suggestion after 9 characters)" class="form-control" onkeyup="
+  										var start = this.selectionStart;
+  										var end = this.selectionEnd;
+  										this.value = this.value.toUpperCase();
+  										this.setSelectionRange(start, end);
+									">
+	                            </div>
+	                        </div>
+	                        <!-- <div class="col-md-6">
+	                            <div class="form-group"> 
+	                            	<input id="reservation-usage-samples-option" data-type="search" placeholder="Or choose sample (9 characters)" class="form-control">
+	                            </div>
+	                        </div> -->
+	                    </div>                    
+<!-- 	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <select id="reservation-usage-batches-option" class="form-control">
+	                                    <option value="0" selected>Choose Batch...</option>
+	                                </select>
+	                            </div>
+	                        </div>
+	                    </div> -->
+						<div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+	                                <input list="reservation-usage-batches-option" class="form-control" placeholder="No batch defined..." id="reservation-usage-batches-value">
+									<datalist id="reservation-usage-batches-option">
+									</datalist>
+	                            </div>
+	                        </div>
+	                    </div>
+                    </div>
+                    <div id="reservation-usage-extra">
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+		                            <input type="text" id="reservation-usage-sampleType-value" class="form-control" placeholder="Sample Type">
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="row">
+	                        <div class="col-md-12">
+	                            <div class="form-group">
+		                            <input type="text" id="reservation-usage-specie-value" class="form-control" placeholder="Specie">
+	                            </div>
+	                        </div>
+	                    </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class='col-md-12'><span id="ratioComment-value"></span></div>
+                    </div>                    
+                    <input type="hidden" id="reservation-id" value="">
+                    <input type="hidden" id="original-start-str" value="">
+                    <input type="hidden" id="original-end-str" value="">
+                    <input type="hidden" id="step-increment-val" value="">
+                    <input type="hidden" id="reservation-type-overlap" value="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete">Delete</button>
+                <button type="button" class="btn btn-secondary done">I'm done</button>
+                <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Permanently</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure about this ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-ok">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

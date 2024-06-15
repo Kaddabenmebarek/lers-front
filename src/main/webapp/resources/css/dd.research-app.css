@@ -1,0 +1,36 @@
+
+svg.research-apps-menu-icon {
+    height: 24px;
+    width: 24px;
+    fill: white;
+}
+
+.navbar-nav > li:hover > a.nav-link.research-apps-btn {
+    border-bottom-width: 0;
+    margin-bottom: 0;
+    background-color: #d2d0ce4a;
+    border-radius: 20px;
+    width: 40px;
+}
+.dd-research-app-menu-widget .navbar-nav > li:hover > a.nav-link{
+    margin-bottom: 0;
+}
+
+.dd-research-app-menu-widget {
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    z-index: 991;
+    transition: height 0.3s ease-in-out 0s;
+    right: 0;
+    margin-right: 4px;
+    /*height: calc(-112px + 100vh);*/
+    height: 50vh;
+    min-height: 335px;
+    border-radius: 10px;
+}
+
+.dd-research-app-menu-widget iframe {
+    height: 100%;
+    border: 0;
+}

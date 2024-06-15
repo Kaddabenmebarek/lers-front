@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Appenders>
+
+    <!-- Console Appender -->
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+    </Console>
+
+	<RollingFile
+	    name="File"
+	    fileName="/u00/tomcat/logs/lers/lers.log"
+	    filePattern="/u00/tomcat/logs/lers/lers.%d{MM-dd-yyyy}.log.gz"
+	    ignoreExceptions="false">
+	    <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n"/>
+	    <Policies>
+	        <TimeBasedTriggeringPolicy interval="1"/>
+	    </Policies>
+	    <DefaultRolloverStrategy max="1">
+	    	<Delete basePath="/u00/tomcat/logs/lers" maxDepth="1">
+      			<IfLastModified age="30d" />
+    		</Delete>
+   	 	</DefaultRolloverStrategy>
+	</RollingFile>
+	
+  </Appenders>
+  
+  <Loggers>
+
+    <!-- Log everything in spring -->
+    <Logger name="org.springframework" level="info" additivity="false">
+      <AppenderRef ref="File" />
+      <AppenderRef ref="Console" />
+    </Logger>
+
+    <!-- Log everything in hibernate -->
+    <Logger name="org.hibernate" level="info" additivity="false">
+      <AppenderRef ref="File" />
+    </Logger>
+
+    <!-- Log SQL statements -->
+    <Logger name="org.hibernate.SQL" level="info" additivity="false">
+      <AppenderRef ref="File" />
+    </Logger>
+
+    <!-- Log JDBC bind parameters -->
+    <Logger name="org.hibernate.type.descriptor.sql" level="info" additivity="false">
+      <AppenderRef ref="File" />
+    </Logger>
+
+    <Logger name="org.research.kadda.labinventory" level="info" additivity="false">
+        <AppenderRef ref="File" />
+    </Logger>
+
+    <Root level="error">
+      <AppenderRef ref="Console" />
+      <AppenderRef ref="File" />
+    </Root>
+  </Loggers>
+</Configuration>

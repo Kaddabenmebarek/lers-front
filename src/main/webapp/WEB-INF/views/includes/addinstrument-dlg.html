@@ -1,0 +1,157 @@
+<!-- Instrument details modal -->
+<div class="modal" id="addinstrument-modal" tabindex="-1" role="dialog" aria-labelledby="addinstrument-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Add Instrument</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" id="addinstrument-name" class="form-control" placeholder="Intrument Name *">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" id="addinstrument-description" class="form-control" placeholder="Description">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select id="addinstrument-status" class="form-control">
+                                    <option value="0" selected>Choose Status... *</option>
+                                    <option value="1">Working</option>
+                                    <option value="2">Not Working</option>
+                                    <option value="3">Decommissioned</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        	<div class="form-group">
+                                <select id="addinstrument-group" class="form-control">
+                                    <option value="0" selected>Choose Group... *</option>
+                                    <option value="1">PPG</option>
+                                    <option value="2">HTMC</option>
+                                    <option value="3">BIOLOGY</option>
+                                    <option value="4">CHEMISTRY</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+					<br />
+                    <div class="row">
+                    	<div class='col-md-2 input-label'>Instrument Groups</div>
+                        <div class='col-md-10'>
+                            <div class="form-group" id="addInstrGrp-div">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class='col-md-6'>
+                            <div class="form-group">
+                                <input type="text" id="addinstrument-location" class="form-control" placeholder="Location">
+                            </div>
+                        </div>
+                        <div class='col-md-6'>
+                        	<div class="form-group">
+                                <input id="addinstrumentOwner" class="form-control" data-type="search" placeholder="owner" >
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class='col-md-2 ratio-label'>Reservable</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select id="addinstrument-reservable" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1" selected>Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class='col-md-2 email-label'>Email notification</div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select id="addinstrument-email" class="form-control">
+                                    <option value="0" selected>No</option>
+                                    <option value="2">Yes</option>
+                                    <option value="1">Yes to all</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class='col-md-1' style="margin-left:-25px">
+							<button type="button" class="btn btn-outline-info"
+								data-toggle="tooltip" data-html="true"
+								title="<ul><li><b><u><em>Yes to all</em></u></b>: email sent to owner, deputies and people who booked on the same interval.</li>
+										<li><b><u><em>Yes</em></u></b>: email only sent to people who booked on the same interval.</li></ul>
+										">?</button>
+						</div>                        
+                    </div> 
+                    <br />
+                     <div class="row">
+						<div class='col-md-2 overlap-label'>Multi reservation</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select id="addinstrument-overlap" class="form-control">
+                                    <option value="0" selected>No</option>
+                                    <option value="1">Yes</option>
+                                    <option value="2">Yes Same</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+						<div class='col-md-1' style="margin-left:-25px">
+							<button type="button" class="btn btn-outline-info"
+								data-toggle="tooltip" data-html="true"
+								title="<ul>
+										<li><b><u><em>Yes</em></u></b>: reservation overlapping possible.</li>
+										<li><b><u><em>Yes Same</em></u></b>: overlaping using the <u>same interval</u>.</li>
+										</ul>
+										">?</button>
+						</div>                          
+						<div class='col-md-2 stepIncrement-label' id="div-stepIncrement1">Minimal reservation</div>
+                        <div class="col-md-3"  id="div-stepIncrement2">
+                            <div class="form-group">
+                            	<input type="number" id="addinstrument-stepIncrement" class="form-control" min="5" step="1" max="100">
+                            </div>
+                        </div>
+                        <div class='col-md-1' id="div-stepIncrement3" style="margin-left:-25px">%</div>
+                      </div>   
+                    <br />                  
+                    <div class="row">
+                    	<div class='col-md-2 input-label'>Deputies</div>
+                        <div class='col-md-10'>
+                            <div class="form-group" id="adddeputies-div">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                    	<div class='col-md-2 input-label'>Reservation Options</div>
+                        <div class='col-md-10'>
+                            <div class="form-group" id="addResaOptions-div">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="instrument-id" value="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

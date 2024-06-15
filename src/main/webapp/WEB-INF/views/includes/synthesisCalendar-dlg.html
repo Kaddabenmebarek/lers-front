@@ -1,0 +1,214 @@
+<!-- Synthesis Order Modal -->
+
+<div class="modal" id="synthesisorder-modal" tabindex="-1" role="dialog" aria-labelledby="synthesisorderModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="synthesisorderTitle">Synthesis Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                	<div class="row">
+                		<div class="col-md-12">
+                			<div class="form-group">
+                				<input type="text" id="synthesisorder-title" class="form-control" placeholder="Title *">
+                			</div>
+                		</div>
+                	</div>
+                	<br />                
+                	<div class="row">
+                		<div class="col-md-12">
+                			<div class="form-group">
+                				<input type="text" id="synthesisorder-requester-option" data-type="search" class="form-control" placeholder="Requester *" >
+                			</div>
+                		</div>
+                	</div>
+                	<br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group date" id="req-datetime-picker" data-target-input="nearest">
+                                    <input type="text" placeholder="request date/time *" id="req-datetime" class="form-control datetimepicker-input" data-target="#req-datetime-picker"/>
+                                    <div class="input-group-append" data-target="#req-datetime-picker" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                	<br />
+                	<div class="row">
+                		<div class="col-md-12">
+                			<div class="form-group">
+                				<input id="synthesisorder-projects-option" data-type="search" placeholder="Project" class="form-control">
+                			</div>
+                		</div>
+                	</div>
+                	<br />
+                	<div class="row">
+               			<div class="col-md-12">
+ 	               			<div class="input-group mb-3">
+							  <input id="synthesisorder-coumpounds-option" data-type="search" class="form-control" placeholder="IDOR-, ACT- or EXT-number (9 char min)" aria-label="Compound (9 char min)" aria-describedby="basic-addon2">
+							  <div class="input-group-append">
+							  	<button id="structBtn" type="button" class="btn btn-outline-info" style="display:none"><img src="../lers/resources/images/struct.png" alt="" width="21px" height="18px"/></button>
+							  </div>
+							</div>
+               			</div>
+                	</div>   
+                	<br />
+                	<div class="row">
+                		<div class="col-md-7">
+                				<input type="number" id="synthesisorder-quantity" min="0" step="1" placeholder="Quantity" data-bind="value:synthesisorder-quantity" class="form-control" />
+                		</div>
+                		<!-- <div class="col-md-1"> -->
+                			&nbsp;
+                		<!-- </div> -->
+						<div class="col-md-4">  
+								<select id="synthesisorder-unit" class="form-control">
+                                    <option value="0" selected>Choose unit...</option>
+                                    <option value="mg">mg</option>
+                					<option value="g">g</option>
+                					<option value="mmol">mmol</option>
+                                </select>              				
+               			</div>
+                	</div>                 	             	
+                	<br />                	
+                	<div class="row">
+                		<div class="col-md-12">
+                			<div class="input-group">
+								<input type="text" class="form-control" id="synthesisorder-link" name="synthesisorder-link" placeholder="External Link"/> 
+								<span class="input-group-btn">
+					        		<button class="btn btn-info" type="button" id="orderDescriptionLinkBtn">Go</button>
+					      		</span>
+					        </div>
+                		</div>
+                	</div>
+                	<br />                	
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group date" id="order-start-datetime-picker" data-target-input="nearest">
+                                    <input type="text" placeholder="start date/time *" id="start-datetime" class="form-control datetimepicker-input" data-target="#order-start-datetime-picker"/>
+                                    <div class="input-group-append" data-target="#order-start-datetime-picker" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group date" id="order-end-datetime-picker" data-target-input="nearest">
+                                    <input type="text" placeholder="end date/time *" id="end-datetime" class="form-control datetimepicker-input" data-target="#order-end-datetime-picker"/>
+                                    <div class="input-group-append" data-target="#order-end-datetime-picker" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                	<br />
+                	<div class="row">
+                		<div class="col-md-12">
+                			<div class="form-group">
+                				<textarea class="form-control" id="synthesisorder-remarks" rows="2" cols="3" placeholder="Remarks"></textarea>
+                			</div>
+                		</div>
+                	</div>
+                	<br />                	
+<!--                 	<div class="row">
+                		<div class="col-md-12">
+                			<div class="form-group">
+                				<input type="text" id="synthesisorder-link" class="form-control" placeholder="External link">
+                			</div>
+                		</div>
+                	</div>
+                	<br />
+                 	<div class="row">
+                		<div class="col-md-12">
+                			<div class="form-group">
+                				<input id="synthesisorder-file" type="file" placeholder="Attach file" multiple="multiple" placeholder="Attach file">
+                			</div>
+                		</div>
+                	</div>                      	     	
+                    <br/> -->
+                    <input type="hidden" id="synthesisorder-id" value="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete">Delete</button>
+                <button type="button" class="btn btn-warning done">Synthesis Order Ready</button>
+                <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Permanently</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure about this?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-ok">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Send Email Confirmation Modal -->
+<div class="modal fade" id="emailconfirm" tabindex="-1" role="dialog" aria-labelledby="emailConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Send Email To Requester</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to send an email to the requester?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="emailconfirmok">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Structur modal -->
+<div class="modal fade" id="confirm-structure" tabindex="-1" role="dialog" aria-labelledby="confirmStructureLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Compound structure</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="compoundStructureContainer"><img class="align-center" id="structureImg"></img></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

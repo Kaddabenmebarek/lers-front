@@ -1,0 +1,38 @@
+:root {
+    --body-color: #f4f4f4;
+}
+body{
+    background-color: #323232;
+    color:var(--body-color);
+}
+
+#osiris-login {
+    box-shadow: 0 2px 3px 1px rgb(23 23 23 / 14%), 2px 2px 8px 3px rgb(17 17 17 / 12%);
+    border-color: #9f9f9f;
+}
+
+h2, #osiris-login .row > label {
+    color:var(--body-color);
+}
+
+/*remove auto fill color from chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+input[type="text"], input[type="password"] {
+    background-color: #666666;
+    color: var(--body-color);
+    border: 1px solid #303030;
+    border-radius:3px;
+    box-shadow: inset 2px 2px 2px 0px #3d3d3d;
+}
+
+input:focus-visible {
+    outline: #343434 auto 1px;
+}
+
+div#themer {
+    color: white;
+}

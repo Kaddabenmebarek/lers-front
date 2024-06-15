@@ -1,0 +1,143 @@
+variables:
+  PROJECT_PUSH_TOKEN: ${DD_PLANNER_PUSH_TOKEN}
+  MY_PACKAGE_PATH_NAME: "lers"
+
+image: $CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX/maven:3.8.4-amazoncorretto-11
+
+cache:
+  key: "$CI_PIPELINE_ID"
+  paths:
+    - .m2
+    - .scripts
+    - target
+
+stages:
+  - prepare
+  - build
+  #- test
+  - package
+  - deploy
+  - cleanup
+
+resources:
+  stage: prepare
+  script:
+    - curl --verbose --location --output resources.sh --header "PRIVATE-TOKEN:${CICD_UTILS_TOKEN}" "${RESOURCES_TOMCAT_URL}"
+    - chmod a+x resources.sh
+    - bash resources.sh
+  artifacts:
+    reports:
+      # Use artifacts:reports:dotenv to expose the variables to other jobs
+      dotenv: variables.env
+
+# update pom version to not snapshot when merging on master
+update_pom_version:
+  stage: prepare
+  needs: [resources]
+  image: $CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX/artaius/jfx:8u322  # use this image to have git and maven in it
+  script:
+    - if [[ $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH ]]; then exit 0; fi
+    - bash .scripts/update_pom_version.sh
+  artifacts:
+    reports:
+      dotenv: variables.env
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    - if: $CI_PIPELINE_SOURCE != "merge_request_event"
+      when: always
+
+
+build_job:
+  stage: build
+  needs: [resources, update_pom_version]
+  script:
+    - echo "Compiling the code..."
+    #if version was update in update_pom_version, get updated version in pom (git cmd not available)
+    - if [[ $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $IS_UPDATED_VERSION ]]; then mvn versions:set -DremoveSnapshot; fi
+    - mvn $MAVEN_CLI_OPTS compile -U
+    - echo "Compile complete."
+
+
+# UNIT TESTS --------------------------------------------------------------
+#unit_test:
+#  stage: test
+#  needs: [resources, update_pom_version, build_job]
+#  script:
+#    - if [[ $SKIP_UNIT_TESTS ]]; then echo "Unit tests Skipped by SKIP_UNIT_TESTS variable"; exit 0; fi
+#    - echo "Running unit tests..."
+#    #if version was update in update_pom_version, get updated version in pom (git cmd not available)
+#    - if [[ $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $IS_UPDATED_VERSION ]]; then mvn versions:set -DremoveSnapshot; fi
+#    - mvn $MAVEN_CLI_OPTS test -Dmaven.main.skip
+#    - echo "Running unit tests complete"
+#  artifacts:
+#    when: always
+#    reports:
+#      junit:
+#        - target/surefire-reports/TEST-*.xml
+#  rules:
+#    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+#      when: never
+#    # always test on master and main develop branch
+#    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop"
+#      when: always
+#    #test only on change on core library otherwise or if last run failed
+#    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH != "develop"
+#      changes:
+#        - $CLIENT_LIB_DIR/*
+
+# CREATE ARTIFACT(S) (WAR) ------------------------------------------------
+package:
+  stage: package
+  needs: [resources, update_pom_version, build_job]
+  script:
+    #if version was update in update_pom_version, get updated version in pom (git cmd not available)
+    - if [[ $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $IS_UPDATED_VERSION ]]; then mvn versions:set -DremoveSnapshot; fi
+    - 'mvn $MAVEN_CLI_OPTS package -Dmaven.main.skip -DskipTests'
+  artifacts:
+    when: always
+    #expire_in: 1 week
+    paths:
+      - target/*.war
+
+
+deploy_staging:
+  stage: deploy
+  needs: [resources, package]
+  variables:
+    PACKAGE_PATH_NAME: $MY_PACKAGE_PATH_NAME
+  script:
+    - bash .scripts/deployTomcat.sh
+  environment:
+    name: test
+    url: $TOMCAT_SERVER/$MY_PACKAGE_PATH_NAME
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    - if: $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+      when: manual
+
+deploy_production:
+  stage: deploy
+  needs: [resources, package] #, unit_test
+  variables:
+    PACKAGE_PATH_NAME: $MY_PACKAGE_PATH_NAME
+  script:
+    - bash .scripts/deployTomcat.sh
+  environment:
+    name: production
+    url: $TOMCAT_SERVER/$MY_PACKAGE_PATH_NAME
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: manual
+
+cleanup:
+  stage: cleanup
+  script:
+    - echo "Cleaning up"
+    - rm -rf "${CACHE_PATH}/${CI_PIPELINE_ID}"
+  when: always

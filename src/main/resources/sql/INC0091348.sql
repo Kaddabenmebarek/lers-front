@@ -1,0 +1,2 @@
+alter table CHEMINFRA.INSTRUMENT add DEPUTY VARCHAR2(64 BYTE);
+update CHEMINFRA.INSTRUMENT set deputy = 'RIBICV' where username = 'BARTENC';

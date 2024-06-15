@@ -1,0 +1,208 @@
+<!-- Instrument details modal -->
+<div class="modal" id="instrument-modal" tabindex="-1" role="dialog" aria-labelledby="instrument-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="instrument-modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- fields : name, description, status, location, group, owner, reservable -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" id="instrument-name" class="form-control" placeholder="Intrument Name">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" id="instrument-description" class="form-control" placeholder="Description">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select id="instrument-status" class="form-control">
+                                    <option value="0" selected>Choose Status...</option>
+                                    <option value="1">Working</option>
+                                    <option value="2">Not Working</option>
+                                    <option value="3">Decommissioned</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        	<div class="form-group">
+                                <select id="instrument-group" class="form-control" disabled>
+                                    <option value="0" selected>Choose Group...</option>
+                                    <option value="1">PPG</option>
+                                    <option value="2">HTMC</option>
+                                    <option value="3">BIOLOGY</option>
+                                    <option value="4">CHEMISTRY</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class='col-md-6'>
+                            <div class="form-group">
+                                <input type="text" id="instrument-location" class="form-control" placeholder="Location">
+                            </div>
+                        </div>
+                        <div class='col-md-6'>
+                        	<div class="form-group">
+                                <input id="instrument-owner" class="form-control" data-type="search" placeholder="owner">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class='col-md-2 ratio-label'>Reservable</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select id="instrument-reservable" class="form-control">
+                                    <option value="0">No</option>
+                                    <option value="1" selected>Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class='col-md-2 email-label'>Email notification</div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select id="instrument-email" class="form-control">
+                                    <option value="0" selected>No</option>
+                                    <option value="2">Yes</option>
+                                    <option value="1">Yes to all</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class='col-md-1' style="margin-left:-25px">
+							<button type="button" class="btn btn-outline-info"
+								data-toggle="tooltip" data-html="true"
+								title="<ul><li><b><u><em>Yes to all</em></u></b>: email sent to owner, deputies and people who booked on the same interval.</li>
+										<li><b><u><em>Yes</em></u></b>: email only sent to people who booked on the same interval.</li></ul>
+										">?</button>
+						</div>                        
+                    </div> 
+                    <br />
+                     <div class="row">
+						<div class='col-md-2 overlap-label'>Multi reservation</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select id="instrument-overlap" class="form-control">
+                                    <option value="0" selected>No</option>
+                                    <option value="1">Yes</option>
+                                    <option value="2">Yes Same</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+						<div class='col-md-1' style="margin-left:-25px">
+							<button type="button" class="btn btn-outline-info"
+								data-toggle="tooltip" data-html="true"
+								title="<ul>
+										<li><b><u><em>Yes</em></u></b>: reservation overlapping possible.</li>
+										<li><b><u><em>Yes Same</em></u></b>: overlaping using the <u>same interval</u>.</li>
+										</ul>
+										">?</button>
+						</div>                          
+						<div class='col-md-2 stepIncrement-label' id="div-stepIncrement1">Minimal reservation</div>
+                        <div class="col-md-3"  id="div-stepIncrement2">
+                            <div class="form-group">
+                            	<input type="number" id="instrument-stepIncrement" class="form-control" min="5" step="1" max="100">
+                            </div>
+                        </div>
+                        <div class='col-md-1' id="div-stepIncrement3" style="margin-left:-25px">%</div>
+                      </div>   
+                    <br />                  
+                    <div class="row">
+                    	<div class='col-md-2 input-label'>Deputies</div>
+                        <div class='col-md-10'>
+                            <div class="form-group" id="deputies-div">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                    	<div class='col-md-2 input-label'>Priority Users</div>
+                        <div class='col-md-10'>
+                            <div class="form-group" id="priorityUsers-div">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class='col-md-2 timepoint-label'>Timepoint</div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <div class="input-group date" id="start-timepoint-picker" data-target-input="nearest">
+                                    <input type="text" placeholder="Timepoint" id="start-timepoint" class="form-control datetimepicker-input" data-target="#start-timepoint-picker"/>
+                                    <div class="input-group-append" data-target="#start-timepoint-picker" data-toggle="datetimepicker">
+                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                    </div>
+                                </div>                                
+                                
+							</div>
+                        </div>
+                        <div class='col-md-1' style="margin-left:-25px">
+							<button type="button" class="btn btn-outline-info"
+								data-toggle="tooltip" data-html="true"
+								title="After this timepoint, non priority user can book the instrument for the next X days (with X the Retention defined)">?</button>
+						</div>                        
+                    </div> 
+                    <br />
+                    <div class="row" id="maxDaysDiv" >
+                        <div class='col-md-2 maxdays-label'>Retention (days)</div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input type="number" id="instrument-maxDay" class="form-control" placeholder="Max Days">
+                            </div>
+                        </div>
+                        <div class='col-md-1' style="margin-left:-25px">
+							<button type="button" class="btn btn-outline-info"
+								data-toggle="tooltip" data-html="true"
+								title="Define the number of days a non priority user can book the instrument.">?</button>
+						</div>
+                    </div> 
+                    <br />                    
+                    <div class="row">
+                    	<div class='col-md-2 input-label'>Reservation<br />Information</div>
+                        <div class='col-md-10'>
+                            <div class="form-group">
+                            <textarea rows="5" cols="8" id="ratioComment"  class="form-control">
+                            </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                    	<div class='col-md-2 input-label'>Highlight<br />Reservation Information</div>
+                    	<div class="col-md-4">
+                            <div class="form-group">
+                                <select id="instrument-highlight-comment" class="form-control">
+                                    <option value="0" selected>No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                    </div>                                       
+                    <input type="hidden" id="instrument-id" value="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger delete">Delete</button>
+                <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

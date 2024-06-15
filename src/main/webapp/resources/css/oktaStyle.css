@@ -1,0 +1,101 @@
+
+#login-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#okta-login {
+    margin: 40px;
+}
+#okta-signin {
+    padding: 11px 34px;
+}
+#okta-signin > span {
+    margin-right: 4px;
+}
+#okta-signin > img {
+    height: 26px;
+    filter: none;
+}
+#okta-signin > i, #okta-signin > span {
+    vertical-align: sub;
+}
+
+#osiris-login {
+    box-shadow: 0 2px 3px 1px rgb(160 160 160 / 8%), 0 2px 1px 0 rgb(119 119 119 / 12%);
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    padding: 20px 20px 12px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 15px;
+    text-align:center;
+    color:#656565;
+}
+h3 {
+    font-size: 16px
+}
+
+#osiris-login .row {
+    justify-content: flex-end;
+}
+#osiris-login .row > * {
+    display: inline-flex;
+    justify-content: center;
+    width: 150px;
+    align-items: center;
+    margin-right: 11px;
+    margin-bottom: 5px;
+    margin-top: 8px;
+    padding-right: 0;
+}
+
+#osiris-login .row > label {
+    font-size:16px;
+    margin-left: 0;
+    width: auto;
+    color: #656565;
+}
+
+#osiris-login .row > input.btn {
+    padding: 6px 19px;
+    width: 115px;
+    margin-right: 46px;
+    text-align: center;
+}
+
+#menu-bar {
+    width: calc(100% - 483px);
+}
+
+#menu-bar #menu-bar-items {
+    display: none;
+}
+
+div#themer {
+    color: black;
+}
+
+
+div#restrictedVlanMessage {
+    width: 250px;
+}
+
+.warn,
+.warn * {
+    color: #ffc107;
+    font-size: 1.23rem;
+}
+
+.warn h5 {
+    font-size: 1.6rem;
+}
+.warn p.font-italic {
+    font-size: .87rem;
+}
+.warn p a:hover {
+    color: #f3c53d;
+}
